@@ -1,3 +1,5 @@
+import Filter from "./Filter";
+import Sort from "./Sort";
 import FriendListItem from "./FriendListItem";
 import { createSignal, onCleanup, Show, For } from "solid-js";
 
@@ -21,56 +23,18 @@ export default function List() {
   });
 
   return (
-    <Show when={people()} fallback={<p>Loading...</p>}>
-      <div class="m-2 p-2 ">
-        <div class="flex flex-row gap-2">
-          <label for="filter">Filter by:</label>
-
-          <select name="filter" id="filter" multiple size="1" class="px-4 grow">
-            <option value="all" selected>All</option>
-            <optgroup label="Person">
-              <option value="friends">Friends</option>
-              <option value="family">Family</option>
-            </optgroup>
-            <optgroup label="Contact type">
-              <option value="in-person">In person</option>
-              <option value="call">Call</option>
-              <option value="message">Message</option>
-            </optgroup>
-            <optgroup label="Contact type">
-              <option value="solo">Solo</option>
-              <option value="group">In a group</option>
-            </optgroup>
-            <optgroup label="Last contacted">
-              <option value="today">Today</option>
-              <option value="week">Last week</option>
-              <option value="month">Last month</option>
-              <option value="year">Last year</option>
-            </optgroup>
-            <optgroup label="Initiated by">
-              <option value="you">You</option>
-              <option value="them">Them</option>
-            </optgroup>
-          </select>
-
-          <p class="cursor-pointer underline">show</p>
-        </div>
-
-
-        <div class="mt-2 flex flex-row gap-2">
-          <label for="sort" class="">Sort by:</label>
-          <select name="sort" id="sort" class="px-2 grow">
-            <option value="most-recent">Most recently contacted</option>
-            <option value="least-recent">Least recently contacted</option>
-            <option value="name">Name</option>
-          </select>
+    <Show when={ people() } fallback={ <p>Loading...</p>} >
+      <div class="mx-4">
+        <div class="p-4 rounded-xl shadow bg-blue-chill-700">
+          <Filter />
+          <Sort />
         </div>
 
         <ul class="mt-2 grid grid-rows gap-2">
           <For each={people()}>
-            {(person) => (
+            { (person) => (
               <FriendListItem person={person} />
-            )}
+            ) }
           </For>
         </ul>
       </div>

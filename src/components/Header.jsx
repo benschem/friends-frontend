@@ -1,8 +1,8 @@
 export default function Header() {
   return (
-    <header class="top-0 w-full p-8 flex flex-row bg-blue-400">
-      <h1 class="grow text-4xl font-bold italic">Friends App</h1>
-      <p class="shrink">Settings</p>
+    <header class="flex flex-row justify-between py-4">
+      <h1 class="px-4 py-4  text-3xl font-bold font-pacifico text-center text-blue-chill-700">StayConnected</h1>
+      <p class="pr-4 text-right text-6xl text-blue-chill-700">⚙</p>
     </header>
 )
 }
