@@ -1,5 +1,6 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  darkMode: "class",
   theme: {
     colors: {
       transparent: "transparent",
@@ -21,6 +22,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
+        "material-symbols-outlined": ['"Material Symbols Outlined"', "sans"],
         roboto: ["Roboto", "sans-serif"],
         pacifico: ["Pacifico", "cursive"],
       },

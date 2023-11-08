@@ -1,6 +1,6 @@
 export default function Filter() {
   return (
-    <div class="flex flex-row gap-2 text-blue-chill-50 font-roboto">
+    <div class="flex flex-row gap-2 text-blue-chill-900 dark:text-blue-chill-50 font-roboto">
       <label for="filter" class="min-w-max">Filter by:</label>
       <select name="filter" id="filter" multiple size="1" class="px-4 grow text-blue-chill-800">
         <option value="all">All</option>
