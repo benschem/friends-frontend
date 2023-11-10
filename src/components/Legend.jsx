@@ -5,7 +5,7 @@ export default function Legend() {
 
   return (
     <Show when={ !legendHidden() }>
-      <li class="grow-0 items-center rounded-xl shadow font-roboto bg-blue-chill-200 dark:bg-blue-chill-800 divide-y divide-blue-chill-300 dark:divide-blue-chill-900">
+      <li class={`${ legendHidden() ? "hidden" : "visible" } mb-2 grow-0 items-center rounded-xl shadow font-roboto bg-blue-chill-200 dark:bg-blue-chill-800 divide-y divide-blue-chill-300 dark:divide-blue-chill-900`}>
 
         <div class="p-4 w-full flex flex-row justify-between items-center">
           <h3 class="font-bold text-blue-chill-700 dark:text-blue-chill-50">

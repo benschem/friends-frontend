@@ -4,6 +4,8 @@ import App from './App';
 import './index.css';
 
 const root = document.getElementById('root');
+const body = document.querySelector('body');
+body.style.background = "#f2f9f9"
 
 render(
   () => (
