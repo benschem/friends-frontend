@@ -8,17 +8,19 @@ const Friend = lazy(() => import("./pages/Friend"));
 
 export default function App() {
   return (
-    <div class="flex flex-col grow w-full min-h-screen">
+    <>
       <Header />
-      {/* <nav>
-        <A href="/">Home</A>
-      </nav> */}
-        <Routes>
-            <Route path="/" component={Home} />
-            <Route path="/friends" component={Friends} />
-            <Route path="/friends/:id" component={Friend} />
-        </Routes>
-      <Footer />
-    </div>
+      <div class="m-auto flex flex-col grow w-full md:w-3/4 lg:w-1/2 min-h-screen">
+        {/* <nav>
+          <A href="/">Home</A>
+        </nav> */}
+          <Routes>
+              <Route path="/" component={Home} />
+              <Route path="/friends" component={Friends} />
+              <Route path="/friends/:id" component={Friend} />
+          </Routes>
+        <Footer />
+      </div>
+    </>
   );
 }

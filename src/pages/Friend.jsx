@@ -16,7 +16,7 @@ export default function Friend() {
 
   return (
     <div class="mx-4 grow">
-      <A href="/friends" class="ml-4 flex justify-start cursor-pointer font-roboto text-blue-chill-700 dark:text-blue-chill-50">
+      <A href="/friends" class="ml-4 flex justify-start cursor-pointer font-lato text-blue-chill-700 dark:text-blue-chill-50">
         <span class="material-symbols-outlined ">
           arrow_back
         </span>
@@ -26,13 +26,13 @@ export default function Friend() {
       <Show when={ contacts() } fallback={ <LoadingFriendShow /> }>
         <h1 class="p-8 text-center text-3xl font-pacifico text-blue-chill-700 dark:text-blue-chill-50">
           { contacts().data.name }
-          <span class="pl-2 font-roboto text-base font-light text-blue-chill-700 dark:text-blue-chill-50">
+          <span class="pl-2 font-lato text-base font-light text-blue-chill-700 dark:text-blue-chill-50">
             ({ contacts().data.relationship })
           </span>
         </h1>
       </Show>
 
-        <ul class="mx-4 rounded-2xl grid grid-rows gap-2 divide-y divide-blue-chill-200 dark:divide-blue-chill-800">
+        <ul class="mx-4 rounded-2xl grid grid-rows gap-2">
           <NewContact />
           <Show when={ contacts() } fallback={ <LoadingContacts /> }>
             <For each={ contacts().data.contacts }>

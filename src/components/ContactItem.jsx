@@ -3,7 +3,7 @@ import { Show } from 'solid-js';
 export default function ContactItem(props) {
 
   return (
-    <li class="cursor-pointer rounded-xl shadow px-4 flex items-center font-roboto bg-blue-chill-100 dark:bg-blue-chill-700 divide-blue-chill-200 dark:divide-blue-chill-800">
+    <li class="cursor-pointer rounded-xl shadow-sm px-4 flex items-center font-lato bg-light-secondary-bg dark:bg-dark-secondary-bg">
       <div class="p-2 grow flex flex-row justify-center items-center divide-x divide-blue-chill-200 dark:divide-blue-chill-800">
 
         <div class="grow">

@@ -5,7 +5,8 @@ import './index.css';
 
 const root = document.getElementById('root');
 const body = document.querySelector('body');
-body.style.background = "#f2f9f9"
+body.style.background = "#fef4f2"
+body.classList.add('transition-all', 'duration-800', 'delay-100', 'ease-in-out');
 
 render(
   () => (

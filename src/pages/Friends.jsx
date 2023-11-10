@@ -16,16 +16,16 @@ export default function Friends() {
 
   return (
     <div class="mx-4 grow">
-      <h1 class="mb-8 text-3xl text-center font-pacifico text-blue-chill-700 dark:text-blue-chill-50">
+      <h1 class="mb-8 text-3xl text-center font-pacifico text-light-text dark:text-dark-text">
         Your friends and family
       </h1>
 
-      <div class="px-2">
+      <div class="px-4 md:px-8 lg:px-16 xl:px-16 ">
         <Filter />
         <Sort />
       </div>
 
-      <ul class="mt-4 grid grid-rows gap-2">
+      <ul class="mt-8 grid grid-rows gap-4">
         <Legend />
         <Show when={ people() } fallback={ <LoadingFriends /> } >
           <For each={ people().data }>
