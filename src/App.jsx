@@ -1,10 +1,13 @@
-import { lazy } from "solid-js";
-import { Routes, Route } from "@solidjs/router";
+// import { lazy } from "solid-js";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-const Home = lazy(() => import("./pages/Home"));
-const Friends = lazy(() => import("./pages/Friends"));
-const Friend = lazy(() => import("./pages/Friend"));
+import { Routes, Route } from "@solidjs/router";
+// const Home = lazy(() => import("./pages/Home"));
+// const Friends = lazy(() => import("./pages/Friends"));
+// const Friend = lazy(() => import("./pages/Friend"));
+import Home from "./pages/Home";
+import Friends from "./pages/Friends";
+import Friend from "./pages/Friend";
 
 export default function App() {
   return (

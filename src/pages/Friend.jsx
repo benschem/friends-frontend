@@ -1,8 +1,8 @@
-import ContactItem from "../components/ContactItem";
+import Legend from "../components/Legend"
 import { createResource, Show, For } from "solid-js";
+import { LoadingContacts, LoadingFriendShow } from "../components/Loading";
+import ContactCard from "../components/ContactCard";
 import { A, useParams } from "@solidjs/router";
-import { LoadingContacts, LoadingFriendShow  } from "../components/Loading";
-import NewContact from "../components/NewContact";
 
 const fetchContacts = async (id) => {
   const result = await fetch("http://127.0.0.1:3001/api/v1/people/" + id);
@@ -16,32 +16,37 @@ export default function Friend() {
 
   return (
     <div class="mx-4 grow">
-      <A href="/friends" class="ml-4 flex justify-start cursor-pointer font-lato text-blue-chill-700 dark:text-blue-chill-50">
-        <span class="material-symbols-outlined ">
-          arrow_back
-        </span>
-        Back to friends and family
+      <A href="/friends">
+        <p class="cursor-pointer font-lato text-blue-chill-700 dark:text-blue-chill-50">
+          Back
+        </p>
       </A>
 
       <Show when={ contacts() } fallback={ <LoadingFriendShow /> }>
-        <h1 class="p-8 text-center text-3xl font-pacifico text-blue-chill-700 dark:text-blue-chill-50">
+        <h1 class="p-8 text-center text-6xl font-bold font-lato text-light-text dark:text-dark-text">
           { contacts().data.name }
-          <span class="pl-2 font-lato text-base font-light text-blue-chill-700 dark:text-blue-chill-50">
+          <span class="pl-2 font-lato text-base font-light text-light-text dark:text-dark-text">
             ({ contacts().data.relationship })
           </span>
         </h1>
       </Show>
 
-        <ul class="mx-4 rounded-2xl grid grid-rows gap-2">
-          <NewContact />
-          <Show when={ contacts() } fallback={ <LoadingContacts /> }>
-            <For each={ contacts().data.contacts }>
-              { (contact) => (
-                <ContactItem contact={contact} />
-              ) }
-            </For>
-          </Show>
-        </ul>
+      <Legend />
+
+      <h2 class="px-4 my-4 text-xl text-center font-lato font-bold text-light-accent dark:text-dark-accent">
+        Contact history
+      </h2>
+
+      <ul class="mx-4 rounded-2xl grid grid-rows gap-4">
+        {/* <NewContact /> */}
+        <Show when={ contacts() } fallback={ <LoadingContacts /> }>
+          <For each={ contacts().data.contacts }>
+            { (contact) => (
+              <ContactCard contact={contact} />
+            ) }
+          </For>
+        </Show>
+      </ul>
     </div>
   );
 }
