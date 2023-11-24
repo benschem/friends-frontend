@@ -26,7 +26,7 @@ export default function Legend() {
 
         <For each={ legend }>
           { (legendItem) => (
-            <div class="p-4 flex flex- justify-left">
+            <div class="p-4 flex flex- justify-left text-light-text dark:text-dark-text">
                 <Icon icon={legendItem.icon} ideal={legendItem.ideal}/>
                 <p class="ml-4">{ legendItem.description }</p>
             </div>

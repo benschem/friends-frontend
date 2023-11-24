@@ -37,7 +37,7 @@ export default function Friend() {
         Contact history
       </h2>
 
-      <ul class="mx-4 rounded-2xl grid grid-rows gap-4">
+      <ul class="rounded-2xl grid grid-rows gap-4">
         {/* <NewContact /> */}
         <Show when={ contacts() } fallback={ <LoadingContacts /> }>
           <For each={ contacts().data.contacts }>
