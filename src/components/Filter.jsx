@@ -1,12 +1,8 @@
-import { createSignal } from "solid-js";
-
 export default function Filter() {
-  const [expandFilter, setExpandFilter] = createSignal(false);
-
   return (
-    <div class="flex flex-row gap-2 text-light-text dark:text-dark-text font-lato">
-      <label for="filter" class="min-w-max">Filter by:</label>
-      <select name="filter" id="filter" multiple size={ expandFilter() ? "18" : "1" } class="px-4 grow text-blue-chill-800">
+    <div class="form-control w-full max-w-xs">
+      <label for="filter" class="label">Filter by:</label>
+      <select name="filter" id="filter" class="select select-bordered">
         <option value="all">All</option>
         <optgroup label="Person">
           <option value="friends">Friends</option>
@@ -32,9 +28,6 @@ export default function Filter() {
           <option value="them">Them</option>
         </optgroup>
       </select>
-      <p class="cursor-pointer underline" onClick={() => setExpandFilter(!expandFilter())}>
-        { expandFilter() ? "hide" : "show" }
-      </p>
     </div>
   )
 }

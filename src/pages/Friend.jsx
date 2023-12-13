@@ -17,9 +17,9 @@ export default function Friend() {
   return (
     <div class="mx-4 grow">
       <A href="/friends">
-        <p class="cursor-pointer font-lato text-blue-chill-700 dark:text-blue-chill-50">
+        <button class="btn font-lato text-blue-chill-700 dark:text-blue-chill-50">
           Back
-        </p>
+        </button>
       </A>
 
       <Show when={ contacts() } fallback={ <LoadingFriendShow /> }>

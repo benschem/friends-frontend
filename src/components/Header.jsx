@@ -13,7 +13,7 @@ export default function Header() {
       root.classList.remove('dark');
       body.style.background = darkBgColor
       icon.innerText="dark_mode";
-} else {
+    } else {
       root.classList.add('dark');
       body.style.background = lightBgColor
       icon.innerText="light_mode";
@@ -22,7 +22,7 @@ export default function Header() {
   };
 
   const [position, setPosition] = createSignal(window.scrollY)
-  const [visible, setVisible] = createSignal(true)
+  const [, setVisible] = createSignal(true)
 
   createEffect(() => {
     const handleScroll = () => {
@@ -40,22 +40,36 @@ export default function Header() {
   });
 
   return (
-    <header class={ `mb-4 p-4 h-24 w-full ${ visible() ? "top-0" : "-top-24" } transition-all ease-in-out duration-800 delay-100 sticky flex justify-between bg-light-primary-bg dark:bg-dark-primary-bg` }>
+  <header class="navbar bg-base-100">
+    <div class="flex-1">
       <A href="/">
         <p class="cursor-pointer py-4 text-xl font-bold font-pacifico text-center text-light-heading dark:text-dark-heading">
           StayConnected
         </p>
       </A>
-      <p class="mr-4 flex items-center text-right text-6xl">
-        <span id="dark-mode-icon"
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><span id="dark-mode-icon"
               class="material-symbols-outlined block cursor-pointer transition-all ease-in-out duration-150 text-light-text dark:text-dark-text hover:text-light-pop dark:hover:text-dark-pop motion-reduce:transition-none"
               onClick={() => changeMode()}>
           dark_mode
-        </span>
-        <span class="ml-8 material-symbols-outlined cursor-pointer text-light-text dark:text-dark-text hover:text-light-pop dark:hover:text-dark-pop">
+        </span></li>
+        <li>
+          <details>
+            <summary>
+            <span class="ml-8 material-symbols-outlined cursor-pointer text-light-text dark:text-dark-text hover:text-light-pop dark:hover:text-dark-pop">
           settings
         </span>
-      </p>
-    </header>
+            </summary>
+            <ul class="p-2 bg-base-100">
+              <li><a>Link 1</a></li>
+              <li><a>Link 2</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </header>
 )
 }
