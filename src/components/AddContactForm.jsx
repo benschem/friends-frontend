@@ -1,54 +1,84 @@
-import { createSignal } from "solid-js";
+import { createSignal, For } from "solid-js";
 
-const ComplexFormWithValidation = () => {
+export default function AddContactForm(props) {
   const [date, setDate] = createSignal("");
   const [contactType, setContactType] = createSignal("");
   const [initiatedBy, setInitiatedBy] = createSignal("");
   const [context, setContext] = createSignal("");
 
   // Validation error messages
-  const [dateError, setDateError] = createSignal("");
-  const [contactTypeError, setContactTypeError] = createSignal("");
-  const [initiatedByError, setInitiatedByError] = createSignal("");
-  const [contextError, setContextError] = createSignal("");
+  const [dateErrors, setDateErrors] = createSignal([]);
+  const [contactTypeErrors, setContactTypeErrors] = createSignal([]);
+  const [initiatedByErrors, setInitiatedByErrors] = createSignal([]);
+  const [contextErrors, setContextErrors] = createSignal([]);
 
   const handleDateChange = (e) => {
     setDate(e.target.value);
     // Basic validation: Check if the date is not empty
-    setDateError(e.target.value.trim() === "" ? "Date cannot be empty" : "");
+    setDateErrors(e.target.value.trim() === "" ? "Date cannot be empty" : "");
   };
 
   const handleContactTypeChange = (e) => {
     setContactType(e.target.value);
     // Basic validation: Check if the contact type is not empty
-    setContactTypeError(e.target.value.trim() === "" ? "Contact type cannot be empty" : "");
+    setContactTypeErrors(e.target.value.trim() === "" ? "Contact type cannot be empty" : "");
   };
 
   const handleInitiatedByChange = (e) => {
     setInitiatedBy(e.target.value);
     // Basic validation: Check if the initiated by is not empty
-    setInitiatedByError(e.target.value.trim() === "" ? "Initiated by cannot be empty" : "");
+    setInitiatedByErrors(e.target.value.trim() === "" ? "Initiated by cannot be empty" : "");
   };
 
   const handleContextChange = (e) => {
     setContext(e.target.value);
     // Basic validation: Check if the context is not empty
-    setContextError(e.target.value.trim() === "" ? "Context cannot be empty" : "");
+    setContextErrors(e.target.value.trim() === "" ? "Context cannot be empty" : "");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Additional validation logic before submission if needed
-    if (date().trim() === "" || contactType().trim() === "" || initiatedBy().trim() === "" || context().trim() === "") {
-      // Display validation errors
-      setDateError(date().trim() === "" ? "Date cannot be empty" : "");
-      setContactTypeError(contactType().trim() === "" ? "Contact type cannot be empty" : "");
-      setInitiatedByError(initiatedBy().trim() === "" ? "Initiated by cannot be empty" : "");
-      setContextError(context().trim() === "" ? "Context cannot be empty" : "");
+
+    // Validate form fields
+    if (
+      date().trim() === "" ||
+      contactType().trim() === "" ||
+      initiatedBy().trim() === "" ||
+      context().trim() === ""
+    ) {
+      // Update error states and prevent submission
+      setDateErrors(date().trim() === "" ? ["Date cannot be empty"] : []);
+      setContactTypeErrors(contactType().trim() === "" ? ["Contact type cannot be empty"] : []);
+      setInitiatedByErrors(initiatedBy().trim() === "" ? ["Initiated by cannot be empty"] : []);
+      setContextErrors(context().trim() === "" ? ["Context cannot be empty"] : []);
+
       return;
     }
-    // Form submission logic
-    alert(`Submitted: Date - ${date()}, Contact Type - ${contactType()}, Initiated By - ${initiatedBy()}, Context - ${context()}`);
+
+    // Perform AJAX call
+    const url = `http://127.0.0.1:3001/api/v1/people/${props.friendId}/contacts`;
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: date(),
+        contact_type: contactType(),
+        initiated_by: initiatedBy(),
+        context: context(),
+      }),
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log("Response from server:", data);
+      props.refetch();
+    }
+    catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -57,41 +87,65 @@ const ComplexFormWithValidation = () => {
         Date:
         <input type="date" value={date()} onInput={handleDateChange} />
       </label>
-      {dateError() && <span style="color: red;">{dateError()}</span>}
+      <For each={dateErrors()}>
+        {(error) => (
+          <span class="text-light-warning dark:text-dark-warning">
+            {error}
+          </span>
+        )}
+      </For>
 
       <label>
         Contact Type:
         <select value={contactType()} onInput={handleContactTypeChange}>
           <option value="">Select</option>
-          <option value="device">Device</option>
-          <option value="in-person">In-person</option>
+          <option value="call">Call</option>
+          <option value="message">Message</option>
+          <option value="in person">In person</option>
         </select>
       </label>
-      {contactTypeError() && <span style="color: red;">{contactTypeError()}</span>}
+      <For each={contactTypeErrors()}>
+        {(error) => (
+          <span class="text-light-warning dark:text-dark-warning">
+            {error}
+          </span>
+        )}
+      </For>
 
       <label>
         Initiated By:
         <select value={initiatedBy()} onInput={handleInitiatedByChange}>
           <option value="">Select</option>
-          <option value="me">Me</option>
-          <option value="then">Then</option>
+          <option value="you">Me</option>
+          <option value="them">Them</option>
+          <option value="other">Other</option>
         </select>
       </label>
-      {initiatedByError() && <span style="color: red;">{initiatedByError()}</span>}
+      <For each={initiatedByErrors()}>
+        {(error) => (
+          <span class="text-light-warning dark:text-dark-warning">
+            {error}
+          </span>
+        )}
+      </For>
 
       <label>
         Context:
         <select value={context()} onInput={handleContextChange}>
           <option value="">Select</option>
-          <option value="solo">Solo</option>
-          <option value="group">Group</option>
+          <option value="solo">Individually</option>
+          <option value="group">In a group</option>
         </select>
       </label>
-      {contextError() && <span style="color: red;">{contextError()}</span>}
+      <For each={contextErrors()}>
+        {(error) => (
+          <span class="text-light-warning dark:text-dark-warning">
+            {error}
+          </span>
+        )}
+      </For>
 
-      <button type="submit" class="mt-2 py-2 px-4 border rounded-lg font-lato text-blue-chill-700 dark:text-blue-chill-50">Submit</button>
+      <button type="submit" class="py-2 px-4 border rounded-lg font-lato text-blue-chill-700 dark:text-blue-chill-50">Submit</button>
     </form>
   );
-};
-
-export default ComplexFormWithValidation;
+}

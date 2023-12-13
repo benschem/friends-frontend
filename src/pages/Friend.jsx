@@ -1,5 +1,5 @@
 import Legend from "../components/Legend"
-import { createResource, Show, For } from "solid-js";
+import { createResource, createSignal, createEffect, Show, For } from "solid-js";
 import { LoadingContacts, LoadingFriendShow } from "../components/Loading";
 import ContactCard from "../components/ContactCard";
 import { A, useParams } from "@solidjs/router";
@@ -12,8 +12,7 @@ const fetchContacts = async (id) => {
 
 export default function Friend() {
   const params = useParams();
-
-  const [contacts] = createResource(params.id, fetchContacts);
+  const [contacts, { mutate, refetch }] = createResource(params.id, fetchContacts);
 
   return (
     <div class="mx-4 grow">
@@ -36,8 +35,9 @@ export default function Friend() {
           Been in touch with { contacts().data.name }?
         </h2>
       </Show>
-
-      <AddContactForm />
+      <div class="w-max m-auto">
+        <AddContactForm friendId={params.id} refetch={refetch}/>
+      </div>
 
       <h2 class="px-4 my-4 text-xl text-center font-lato font-bold text-light-accent dark:text-dark-accent">
         Contact history

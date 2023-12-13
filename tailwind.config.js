@@ -1,3 +1,5 @@
+/*eslint-env node*/
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
@@ -53,6 +55,7 @@ module.exports = {
         accent: "#81B29A",
         highlight: "#F2CC8F",
         pop: "#E07A5F",
+        warning: "#df4723",
       },
       dark: {
         "primary-bg": "#3D405B",
@@ -62,6 +65,7 @@ module.exports = {
         heading: "#ddeff0",
         highlight: "#f26431",
         pop: "#E07A5F",
+        warning: "#df4723",
       },
     },
     extend: {
